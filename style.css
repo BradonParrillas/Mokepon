@@ -124,3 +124,8 @@ input {
     color: #D9A443;
     background: transparent;
 }
+
+.historial-de-ataques {
+    display: grid;
+    grid-template-columns: 100px 100px;
+}
