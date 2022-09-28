@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond&family=Poppins:wght@300&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #1C1B26;
+}
+
+#seleccionar-mascota {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.titulo {
+    color: white;
+    font-size: 44px;
+    letter-spacing: 2px;
+    font-family: 'Cormorant Garamond', serif;
+}
+
+.subtitulo {
+    color: #D9A443;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.tarjetas {
+    display: flex;
+    gap: 10px;
+}
+
+.tarjeta-de-mokepon {
+    width: 190px;
+    height: 160px;
+    background: #BFB195;
+    padding: 10px;
+    box-sizing: border-box;
+    margin: 10px;
+    /* border: 1px solid #D9A05B; */
+    border-radius: 4px;
+    color: #1C1B26;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+}
+
+.tarjeta-de-mokepon:hover {
+    background-color: #D9A443;
+}
+
+.tarjeta-de-mokepon img {
+    width: 112px;
+}
+
+.tarjeta-de-mokepon p {
+    font-weight: 600;
+}
+
+input {
+    display: none;
+}
+
+#boton-mascota {
+    width: 190px;
+    height: 50px;
+    padding: 10px;
+    box-sizing: border-box;
+    margin-top: 20px;
+    border-radius: 20px;
+    background: transparent;
+    border: 2px solid #D9A443;
+    color: #D9A443;
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+    margin-top: 20px;
+}
+
+#boton-mascota:hover {
+    background-color: #D9A443;
+    color: #1C1B26;
+    font-weight: 600;
+}
+
+#seleccionar-ataque {
+    flex-direction: column;
+    align-items: center;
+}
+
+.boton-de-ataque {
+    background-color: #BFB195;
+    border: none;
+    /* padding: 24px; */
+    box-sizing: border-box;
+    border-radius: 50%;
+    color: #1C1B26;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    width: 80px;
+    height: 80px;
+}
+
+.boton-de-ataque:hover {
+    background-color: #D9A443;
+    font-size: 14px;
+}
+
+#mensajes {
+    width: 13rem;
+    padding: 1.5rem;
+    margin-top: 1rem;
+    border-radius: 20px;
+    display: flex;
+    background-color: #475934;
+    color: white;
+    flex-direction: column-reverse;
+    align-items: center;
+}
+
+#boton-reiniciar {
+    border: none;
+    color: #D9A443;
+    background: transparent;
+}
