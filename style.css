@@ -24,8 +24,8 @@ body {
     font-size: 16px;
     font-weight: 400;
 }
-
-.tarjetas {
+/* ?Haplica solucion con SASS */
+.tarjetas, .tarjetas-ataques {
     display: flex;
     gap: 10px;
 }
@@ -48,6 +48,7 @@ body {
 }
 
 .tarjeta-de-mokepon:hover {
+    transition: 300ms;
     background-color: #D9A443;
 }
 
@@ -76,12 +77,13 @@ input {
     font-size: 16px;
     font-family: 'Poppins', sans-serif;
     margin-top: 20px;
+    font-weight: 500;
 }
 
 #boton-mascota:hover {
+    transition: 200ms;
     background-color: #D9A443;
     color: #1C1B26;
-    font-weight: 600;
 }
 
 #seleccionar-ataque {
@@ -89,22 +91,28 @@ input {
     align-items: center;
 }
 
+.botones-de-ataque {
+    display: flex;
+    gap: 1rem;
+}
+
 .boton-de-ataque {
     background-color: #BFB195;
     border: none;
-    /* padding: 24px; */
     box-sizing: border-box;
-    border-radius: 50%;
+    border-radius: 3px;
     color: #1C1B26;
     font-family: 'Cormorant Garamond', serif;
     font-weight: 600;
-    width: 80px;
+    width: 100px;
     height: 80px;
+    font-size: 16px;
 }
 
 .boton-de-ataque:hover {
+    transition: 75ms;
     background-color: #D9A443;
-    font-size: 14px;
+    font-size: 18px;
 }
 
 #mensajes {
@@ -115,8 +123,12 @@ input {
     display: flex;
     background-color: #475934;
     color: white;
-    flex-direction: column-reverse;
+    flex-direction: column;
     align-items: center;
+}
+
+#mensajes #resultado {
+    text-align: center;
 }
 
 #boton-reiniciar {
@@ -125,7 +137,27 @@ input {
     background: transparent;
 }
 
+#boton-reiniciar:hover {
+    transition: 100ms;
+    font-size: 14px;
+}
+
 .historial-de-ataques {
     display: grid;
     grid-template-columns: 100px 100px;
+}
+
+.historial-jugador, .historial-enemigo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+}
+
+@media (max-width:650px) {
+    .tarjetas {
+        flex-wrap: wrap;
+        justify-content: center;
+        /* flex-direction: column; */
+    }
 }

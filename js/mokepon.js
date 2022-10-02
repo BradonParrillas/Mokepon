@@ -147,11 +147,11 @@ function crearMensaje(resultado) {
 }
 //! ATENCION
 function resultadoFinal(resultadoPartida) {
-    let sectionMensajes = document.getElementById('mensajes')
+    let sectionResultado = document.getElementById('resultado')
     let parrafo = document.createElement('p')
     parrafo.innerHTML = resultadoPartida
-    sectionMensajes.appendChild(parrafo) //AppendChild agrega un hijo al final
-    // sectionMensajes.innerHTML = resultadoPartida //?probar
+    // sectionResultado.appendChild(parrafo) //AppendChild agrega un hijo al final
+    sectionResultado.innerHTML = resultadoPartida //?probar
 
     let sectionReiniciar = document.getElementById('reiniciar')
     sectionReiniciar.style.display = 'block'
