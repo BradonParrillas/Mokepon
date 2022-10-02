@@ -47,10 +47,11 @@ body {
     font-family: 'Cormorant Garamond', serif;
 }
 
+/*!se quito porque puede confundir cuando un input este activo
 .tarjeta-de-mokepon:hover {
     transition: 300ms;
     background-color: #D9A443;
-}
+} */
 
 .tarjeta-de-mokepon img {
     width: 112px;
@@ -62,6 +63,10 @@ body {
 
 input {
     display: none;
+}
+
+input:checked + label{
+    background-color: #D9A443;
 }
 
 #boton-mascota {
