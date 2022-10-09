@@ -33,6 +33,8 @@ let botonFuego = document
 let botonAgua = document
 let botonTierra = document
 
+let botones = []
+
 let inputHipodoge
 let inputCapipepo
 let inputRatigueya
@@ -123,6 +125,7 @@ function seleccionarMascotaJugador() {
 
     extraerAtaques(mascotaJugador)
     seleccionarMascotaEnemigo()
+    secuenciaAtaque()
 }
 
 function extraerAtaques(mascota) {
@@ -147,9 +150,19 @@ function mostrarAtaques(ataques) {
     botonAgua = document.getElementById('boton-agua')
     botonTierra = document.getElementById('boton-tierra')
 
+    botones = document.querySelectorAll('.boton-de-ataque')
+
     botonFuego.addEventListener('click', ataqueFuego)
     botonAgua.addEventListener('click', ataqueAgua)
     botonTierra.addEventListener('click', ataqueTierra)
+}
+//! 11:56
+function secuenciaAtaque() {
+    botones.forEach((boton) => {
+        boton.addEventListener('click', (e) => {
+            console.log(e.target)
+        })
+    })
 }
 
 function seleccionarMascotaEnemigo() {
