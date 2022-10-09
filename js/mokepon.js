@@ -1,9 +1,7 @@
 const sectionSeleccionarAtaque = document.getElementById('seleccionar-ataque')
 const sectionReiniciar = document.getElementById('reiniciar')
 const botonMascotaJugador = document.getElementById('boton-mascota')
-const botonFuego = document.getElementById('boton-fuego')
-const botonAgua = document.getElementById('boton-agua')
-const botonTierra = document.getElementById('boton-tierra')
+
 const botonReiniciar = document.getElementById('boton-reiniciar')
 
 const sectionSeleccionarMascota = document.getElementById('seleccionar-mascota')
@@ -18,15 +16,22 @@ const sectionResultado = document.getElementById('resultado')
 const sectionAtaquesDelJugador = document.getElementById('ataques-del-jugador')
 const sectionAtaquesDelEnemigo = document.getElementById('ataques-del-enemigo')
 
-const contenedorTarjetas = document.getElementById('contenedor-tarjetas')
+const contenedorTarjetas = document.getElementById('contenedorTarjetas')
+
+let contenedorAtaques = document.getElementById("contenedorAtaques")
 
 let mokepones = []
 let ataqueJugador
 let ataqueEnemigo
 let opcionDeMokepones
 let mascotaJugador
+let ataquesMokepon
 let vidasJugador = 3
 let vidasEnemigo = 3
+
+let botonFuego = document
+let botonAgua = document
+let botonTierra = document
 
 let inputHipodoge
 let inputCapipepo
@@ -46,27 +51,27 @@ let capipepo = new Mokepon('Capipepo', './assets/1.png', 5)
 let ratigueya = new Mokepon('Ratigueya', './assets/2.png', 5)
 
 hipodoge.ataques.push(
-    { nombre: '💧', id: 'boton-agua' },
-    { nombre: '💧', id: 'boton-agua' },
-    { nombre: '💧', id: 'boton-agua' },
-    { nombre: '🔥', id: 'boton-fuego' },
-    { nombre: '🌱', id: 'boton-tierra' },
+    { nombre:'Agua', emoticon: '💧', id: 'boton-agua' },
+    { nombre:'Agua', emoticon: '💧', id: 'boton-agua' },
+    { nombre:'Agua', emoticon: '💧', id: 'boton-agua' },
+    { nombre:'Fuego', emoticon: '🔥', id: 'boton-fuego' },
+    { nombre:'Tierra', emoticon: '🌱', id: 'boton-tierra' },
 )
 
 capipepo.ataques.push(
-    { nombre: '💧', id: 'boton-agua' },
-    { nombre: '🔥', id: 'boton-fuego' },
-    { nombre: '🌱', id: 'boton-tierra' },
-    { nombre: '🌱', id: 'boton-tierra' },
-    { nombre: '🌱', id: 'boton-tierra' },
+    { nombre:'Agua', emoticon: '💧', id: 'boton-agua' },
+    { nombre:'Fuego', emoticon: '🔥', id: 'boton-fuego' },
+    { nombre:'Tierra', emoticon: '🌱', id: 'boton-tierra' },
+    { nombre:'Tierra', emoticon: '🌱', id: 'boton-tierra' },
+    { nombre:'Tierra', emoticon: '🌱', id: 'boton-tierra' },
 )
 
 ratigueya.ataques.push(
-    { nombre: '💧', id: 'boton-agua' },
-    { nombre: '🔥', id: 'boton-fuego' },
-    { nombre: '🔥', id: 'boton-fuego' },
-    { nombre: '🔥', id: 'boton-fuego' },
-    { nombre: '🌱', id: 'boton-tierra' },
+    { nombre:'Agua', emoticon: '💧', id: 'boton-agua' },
+    { nombre:'Fuego', emoticon: '🔥', id: 'boton-fuego' },
+    { nombre:'Fuego', emoticon: '🔥', id: 'boton-fuego' },
+    { nombre:'Fuego', emoticon: '🔥', id: 'boton-fuego' },
+    { nombre:'Tierra', emoticon: '🌱', id: 'boton-tierra' },
 )
 
 mokepones.push(hipodoge, capipepo, ratigueya)
@@ -94,10 +99,6 @@ function iniciarJuego() {
     sectionReiniciar.style.display = 'none'
 
     botonMascotaJugador.addEventListener('click', seleccionarMascotaJugador)
-    
-    botonFuego.addEventListener('click', ataqueFuego)
-    botonAgua.addEventListener('click', ataqueAgua)
-    botonTierra.addEventListener('click', ataqueTierra)
 
     botonReiniciar.addEventListener('click',reiniciarJuego)
 }
@@ -132,6 +133,23 @@ function extraerAtaques(mascota) {
         }
     }
     mostrarAtaques(ataques)
+}
+
+function mostrarAtaques(ataques) {
+    ataques.forEach((ataque) => {
+        ataquesMokepon = `
+        <button id=${ataque.id} class="boton-de-ataque" >${ataque.emoticon}<br>${ataque.nombre}</button>
+        `
+        contenedorAtaques.innerHTML += ataquesMokepon
+    })
+
+    botonFuego = document.getElementById('boton-fuego')
+    botonAgua = document.getElementById('boton-agua')
+    botonTierra = document.getElementById('boton-tierra')
+
+    botonFuego.addEventListener('click', ataqueFuego)
+    botonAgua.addEventListener('click', ataqueAgua)
+    botonTierra.addEventListener('click', ataqueTierra)
 }
 
 function seleccionarMascotaEnemigo() {
