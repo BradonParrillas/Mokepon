@@ -161,23 +161,16 @@ function secuenciaAtaque() {
         boton.addEventListener('click', (e) => {
             if(e.target.textContent.indexOf('🔥') != -1) {
                 ataqueJugador.push('FUEGO')
-                console.log(e.target.textContent)
-                console.log(ataqueJugador)
-                boton.style.color = '#D9A443'
-                boton.style.background = '#112f58'
             } else if(e.target.textContent.indexOf('💧') != -1) {
                 ataqueJugador.push('AGUA')
-                console.log(e.target.textContent)
-                console.log(ataqueJugador)
-                boton.style.color = '#D9A443'
-                boton.style.background = '#112f58'
             } else {
                 ataqueJugador.push('TIERRA')
-                console.log(e.target.textContent)
-                console.log(ataqueJugador)
-                boton.style.color = '#D9A443'
-                boton.style.background = '#112f58'
             }
+            boton.disabled = true
+            console.log(e.target.textContent)
+            console.log(ataqueJugador)
+            boton.style.color = '#D9A443'
+            boton.style.background = '#112f58'
             ataqueAleatorioEnemigo()
         })
     })
@@ -238,13 +231,10 @@ function combate() {
 function revisarVictorias() {
     if(victoriasJugador === victoriasEnemigo) {
         resultadoFinal('Empate')
-        deshabilitarAtaques()
     } else if (victoriasJugador > victoriasEnemigo) {
         resultadoFinal('Felicitaciones🎉! Ganastes la partida👊')
-        deshabilitarAtaques()
     } else {
         resultadoFinal('Perdistes💣, vuelve a intentarlo👍')
-        deshabilitarAtaques()
     }
 }
 
@@ -277,12 +267,6 @@ function habilitarAtaques (){
     botonFuego.disabled = false
     botonAgua.disabled = false
     botonTierra.disabled = false
-}
-
-function deshabilitarAtaques() {
-    botonFuego.disabled = true
-    botonAgua.disabled = true
-    botonTierra.disabled = true
 }
 
 function aleatorio(min, max) {
