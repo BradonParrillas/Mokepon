@@ -100,7 +100,6 @@ function iniciarJuego() {
     inputRatigueya = document.getElementById('Ratigueya')
 
     sectionReiniciar.style.display = 'none'
-
     botonMascotaJugador.addEventListener('click', seleccionarMascotaJugador)
 
     botonReiniciar.addEventListener('click',reiniciarJuego)
