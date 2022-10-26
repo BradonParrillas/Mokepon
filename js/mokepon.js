@@ -22,7 +22,7 @@ let contenedorAtaques = document.getElementById("contenedorAtaques")
 
 let mokepones = []
 let ataqueJugador = []
-let ataqueEnemigo
+let ataqueEnemigo = [   ]
 let opcionDeMokepones
 let mascotaJugador
 let ataquesMokepon
@@ -157,25 +157,28 @@ function mostrarAtaques(ataques) {
 function secuenciaAtaque() {
     botones.forEach((boton) => {
         boton.addEventListener('click', (e) => {
-            if(e.target.textContent === '🔥') {
+            if(e.target.textContent.indexOf('🔥') != -1) {
                 ataqueJugador.push('FUEGO')
+                console.log(e.target.textContent)
                 console.log(ataqueJugador)
                 boton.style.color = '#D9A443'
                 boton.style.background = '#112f58'
-            } else if(e.target.textContent === '💧') {
+            } else if(e.target.textContent.indexOf('💧') != -1) {
                 ataqueJugador.push('AGUA')
+                console.log(e.target.textContent)
                 console.log(ataqueJugador)
                 boton.style.color = '#D9A443'
                 boton.style.background = '#112f58'
             } else {
                 ataqueJugador.push('TIERRA')
+                console.log(e.target.textContent)
                 console.log(ataqueJugador)
                 boton.style.color = '#D9A443'
                 boton.style.background = '#112f58'
             }
+            ataqueAleatorioEnemigo()
         })
     })
-    ataqueAleatorioEnemigo()
 }
 
 function seleccionarMascotaEnemigo() {
@@ -187,14 +190,14 @@ function seleccionarMascotaEnemigo() {
 function ataqueAleatorioEnemigo() {
     ataqueAleatorio = aleatorio(0, ataquesMokeponEnemigo.length - 1)
 
-    if (ataqueAleatorio == 1) {
+    if (ataqueAleatorio == 0 || ataqueAleatorio == 1) {
         ataqueEnemigo.push('FUEGO')
-    } else if (ataqueAleatorio == 2) {
+    } else if (ataqueAleatorio == 3 || ataqueAleatorio == 4) {
         ataqueEnemigo.push('AGUA')
     } else {
-        ataqueEnemigo.push('TIERRA')//!7:41
+        ataqueEnemigo.push('TIERRA')
     }
-
+    console.log(ataqueEnemigo)
     combate()
 }
 
