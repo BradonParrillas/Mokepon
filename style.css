@@ -159,6 +159,16 @@ input:checked + label{
     color: white;
 }
 
+#ver-mapa {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#mapa {
+    border: 2px solid white;
+}
+
 @media (max-width:650px) {
     .tarjetas {
         flex-wrap: wrap;
