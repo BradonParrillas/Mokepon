@@ -1,4 +1,4 @@
-    const sectionSeleccionarAtaque = document.getElementById('seleccionar-ataque')
+const sectionSeleccionarAtaque = document.getElementById('seleccionar-ataque')
 const sectionReiniciar = document.getElementById('reiniciar')
 const botonMascotaJugador = document.getElementById('boton-mascota')
 
@@ -125,22 +125,19 @@ function iniciarJuego() {
 
 function seleccionarMascotaJugador() {
     //sectionSeleccionarAtaque.style.display = 'flex'
-
     
-    
-
     if (inputHipodoge.checked) {
         spanMascotaJugador.innerHTML = inputHipodoge.id
         mascotaJugador = inputHipodoge.id
-        mostrarMapa()
+        iniciarMapa()
     } else if (inputCapipepo.checked) {
         spanMascotaJugador.innerHTML = inputCapipepo.id
         mascotaJugador = inputCapipepo.id
-        mostrarMapa()
+        iniciarMapa()
     } else if (inputRatigueya.checked) {
         spanMascotaJugador.innerHTML = inputRatigueya.id
         mascotaJugador = inputRatigueya.id
-        mostrarMapa()
+        iniciarMapa()
     } else {
         alert('Selecciona una mascota')
     }
@@ -149,12 +146,6 @@ function seleccionarMascotaJugador() {
     extraerAtaques(mascotaJugador)
     seleccionarMascotaEnemigo()
     secuenciaAtaque()
-}
-
-function mostrarMapa() {
-    sectionSeleccionarMascota.style.display = 'none'
-    sectionVerMapa.style.display = 'flex'
-    intervalo = setInterval(pintarPersonaje, 50)
 }
 
 function extraerAtaques(mascota) {
@@ -335,6 +326,34 @@ function moverAbajo() {
 function detenerMovimiento() {
     capipepo.velocidadx = 0
     capipepo.velocidady = 0
+}
+
+function sePresionoUnaTecla(event) {
+    // console.log(event.key)
+    switch (event.key) {
+        case 'ArrowUp':
+            moverArriba()
+            break
+        case 'ArrowDown':
+            moverAbajo()
+            break
+        case 'ArrowLeft':
+            moverIzquierda()
+            break
+        case 'ArrowRight':
+            moverDerecha()
+            break
+        default:
+            break
+    }
+}
+
+function iniciarMapa() {
+    sectionSeleccionarMascota.style.display = 'none'
+    sectionVerMapa.style.display = 'flex'
+    intervalo = setInterval(pintarPersonaje, 50)
+    window.addEventListener('keydown', sePresionoUnaTecla)
+    window.addEventListener('keyup', detenerMovimiento)
 }
 
 window.addEventListener('load', iniciarJuego)
