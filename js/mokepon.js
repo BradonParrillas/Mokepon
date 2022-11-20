@@ -148,6 +148,30 @@ ratigueya.ataques.push(
     { nombre:'Tierra', emoticon: '🌱', id: 'boton-tierra' },
 )
 
+hipodogeEnemigo.ataques.push(
+    { nombre:'Agua', emoticon: '💧', id: 'boton-agua' },
+    { nombre:'Agua', emoticon: '💧', id: 'boton-agua' },
+    { nombre:'Agua', emoticon: '💧', id: 'boton-agua' },
+    { nombre:'Fuego', emoticon: '🔥', id: 'boton-fuego' },
+    { nombre:'Tierra', emoticon: '🌱', id: 'boton-tierra' },
+)
+
+capipepoEnemigo.ataques.push(
+    { nombre:'Agua', emoticon: '💧', id: 'boton-agua' },
+    { nombre:'Fuego', emoticon: '🔥', id: 'boton-fuego' },
+    { nombre:'Tierra', emoticon: '🌱', id: 'boton-tierra' },
+    { nombre:'Tierra', emoticon: '🌱', id: 'boton-tierra' },
+    { nombre:'Tierra', emoticon: '🌱', id: 'boton-tierra' },
+)
+
+ratigueyaEnemigo.ataques.push(
+    { nombre:'Agua', emoticon: '💧', id: 'boton-agua' },
+    { nombre:'Fuego', emoticon: '🔥', id: 'boton-fuego' },
+    { nombre:'Fuego', emoticon: '🔥', id: 'boton-fuego' },
+    { nombre:'Fuego', emoticon: '🔥', id: 'boton-fuego' },
+    { nombre:'Tierra', emoticon: '🌱', id: 'boton-tierra' },
+)
+
 mokepones.push(hipodoge, capipepo, ratigueya)
 
 function iniciarJuego() {
@@ -178,7 +202,6 @@ function iniciarJuego() {
 }
 
 function seleccionarMascotaJugador() {
-    //sectionSeleccionarAtaque.style.display = 'flex'
     
     if (inputHipodoge.checked) {
         spanMascotaJugador.innerHTML = inputHipodoge.id
@@ -198,8 +221,6 @@ function seleccionarMascotaJugador() {
     
 
     extraerAtaques(mascotaJugador)
-    seleccionarMascotaEnemigo()
-    secuenciaAtaque()
 }
 
 function extraerAtaques(mascota) {
@@ -247,13 +268,14 @@ function secuenciaAtaque() {
     })
 }
 
-function seleccionarMascotaEnemigo() {
-    let mascotaAleatorio = aleatorio(0, mokepones.length - 1)
-    spanMascotaEnemigo.innerHTML = mokepones[mascotaAleatorio].nombre
-    ataquesMokeponEnemigo = mokepones[mascotaAleatorio].ataques
+function seleccionarMascotaEnemigo(enemigo) {
+    spanMascotaEnemigo.innerHTML = enemigo.nombre
+    ataquesMokeponEnemigo = enemigo.ataques
+    secuenciaAtaque()
 }
 
 function ataqueAleatorioEnemigo() {
+    console.log('Ataques enemigo: ', ataquesMokeponEnemigo)
     ataqueAleatorio = aleatorio(0, ataquesMokeponEnemigo.length - 1)
 
     if (ataqueAleatorio == 0 || ataqueAleatorio == 1) {
@@ -453,7 +475,11 @@ function revisarColision(enemigo) {
         return;
     }
     detenerMovimiento()
-    alert("Hay Colision " + enemigo.nombre)
+    clearInterval(intervalo) //Detenemos el intervalo
+    console.warn("Se detecto una colision");
+    sectionSeleccionarAtaque.style.display = 'flex'
+    sectionVerMapa.style.display = 'none'
+    seleccionarMascotaEnemigo(enemigo)
 }
 
 window.addEventListener('load', iniciarJuego)
