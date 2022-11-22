@@ -165,14 +165,36 @@ input:checked + label{
     justify-content: center;
 }
 
-#mapa {
-    border: 2px solid white;
+#ver-mapa button {
+    width: 80px;
+    height: 50px;
+    padding: 10px;
+    box-sizing: border-box;
+    margin-top: 20px;
+    border-radius: 20px;
+    background: transparent;
+    border: 2px solid #D9A443;
+    color: #D9A443;
+    font-size: 12px;
+    font-family: 'Poppins', sans-serif;
+    margin: 5px;
+    font-weight: 500;
 }
 
-@media (max-width:650px) {
+@media (max-width:560px) {
     .tarjetas {
         flex-wrap: wrap;
         justify-content: center;
         /* flex-direction: column; */
+    }
+}
+
+@media (max-width:300px) {
+    #ver-mapa div {
+        display: flex;
+        flex-direction: column;
+    }
+    #ver-mapa button {
+        width: 110px;
     }
 }
