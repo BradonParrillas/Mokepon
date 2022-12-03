@@ -26,6 +26,7 @@ let jugadorId = null
 let contenedorAtaques = document.getElementById("contenedorAtaques")
 
 let mokepones = []
+let mokeponesEnemigos = []
 let ataqueJugador = []
 let ataqueEnemigo = []
 let opcionDeMokepones
@@ -382,9 +383,9 @@ function pintarCanvas() {
 
     enviarPosicion(mascotaJugadorObjeto.x, mascotaJugadorObjeto.y)
 
-    // hipodogeEnemigo.pintarMokepon()
-    // capipepoEnemigo.pintarMokepon()
-    // ratigueyaEnemigo.pintarMokepon()
+    mokeponesEnemigos.forEach(function (mokepon) {
+        mokepon.pintarMokepon()
+    })
 
     if (
         mascotaJugadorObjeto.velocidadx !== 0 ||
@@ -409,7 +410,7 @@ function enviarPosicion(x, y) {
     }).then(function (res) {
         if (res.ok) {
             res.json().then(function ({ enemigos }) {
-                enemigos.forEach(enemigo => {
+                mokeponesEnemigos = enemigos.map(enemigo => {
                     let mokeponEnemigo = null
                     try {
                         const mokeponNombre = enemigo.mokepon.nombre || ""
@@ -438,7 +439,7 @@ function enviarPosicion(x, y) {
 
                     mokeponEnemigo.x = enemigo.x;
                     mokeponEnemigo.y = enemigo.y;
-                    mokeponEnemigo.pintarMokepon();
+                    return mokeponEnemigo
                     } catch (error) {
                         
                     }
