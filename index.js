@@ -22,6 +22,10 @@ class Jugador {
         this.mokepon = mokepon
     }
 
+    asignarAtaques(ataques) {
+        this.ataques = ataques
+    }
+
     static encontrarJugador(id) {
         return jugadores.findIndex((jugador) => id === jugador.id)
     }
@@ -76,6 +80,28 @@ app.post("/mokepon/:jugadorId/posicion", (req, res) => {
 
     res.send({
         enemigos
+    })
+})
+
+app.post("/mokepon/:jugadorId/ataques", (req, res) => {
+    const jugadorId = req.params.jugadorId || ""
+    const ataques = req.body.ataques || []
+
+    const jugadorIndex = Jugador.encontrarJugador(jugadorId)
+
+    if (jugadorIndex >= 0) {
+        jugadores[jugadorIndex].asignarAtaques(ataques)
+    }
+
+    res.end()
+})
+
+app.get("/mokepon/:jugadorId/ataques", (req, res) => {
+    const jugadorId = req.params.jugadorId || ""
+    const jugador = jugadores.find((jugador) => jugadorId === jugador.id)
+
+    res.send({
+        ataques: jugador.ataques || []
     })
 })
 

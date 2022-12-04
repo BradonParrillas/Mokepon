@@ -22,6 +22,7 @@ const sectionVerMapa = document.getElementById('ver-mapa')
 const mapa = document.getElementById('mapa')
 
 let jugadorId = null
+let enemigoId = null
 
 let contenedorAtaques = document.getElementById("contenedorAtaques")
 
@@ -265,15 +266,48 @@ function secuenciaAtaque() {
             console.log(ataqueJugador)
             boton.style.color = '#D9A443'
             boton.style.background = '#112f58'
-            ataqueAleatorioEnemigo()
+
+            if (ataqueJugador.length === 5) {
+                console.log("5 ataques")
+                enviarAtaques()
+            }
         })
     })
+}
+
+function enviarAtaques () {
+    fetch(`http://localhost:8080/mokepon/${jugadorId}/ataques`, {
+        method: 'post',
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            ataques: ataqueJugador
+        })
+    })
+
+    intervalo = setInterval(obtenerAtaques, 50)
 }
 
 function seleccionarMascotaEnemigo(enemigo) {
     spanMascotaEnemigo.innerHTML = enemigo.nombre
     ataquesMokeponEnemigo = enemigo.ataques
     secuenciaAtaque()
+}
+
+function obtenerAtaques() {
+    fetch(`http://localhost:8080/mokepon/${enemigoId}/ataques`)
+        .then(function (res) {
+            if (res.ok) {
+                res.json()
+                    .then(function ({ ataques }) {
+                        if (ataques.length === 5) {
+                            ataqueEnemigo = ataques
+                            combate()
+                        }
+                    })
+            }
+        })
 }
 
 function ataqueAleatorioEnemigo() {
@@ -303,6 +337,8 @@ function indexAmbosOponente(jugador, enemigo) {
 }
 
 function combate() {
+    clearInterval(intervalo)
+
     for (let index = 0; index < ataqueJugador.length; index++) {
         if(ataqueJugador[index] == ataqueEnemigo[index]) {
             indexAmbosOponente(index, index)
@@ -385,16 +421,8 @@ function pintarCanvas() {
 
     mokeponesEnemigos.forEach(function (mokepon) {
         mokepon.pintarMokepon()
+        revisarColision(mokepon)
     })
-
-    if (
-        mascotaJugadorObjeto.velocidadx !== 0 ||
-        mascotaJugadorObjeto.velocidady !== 0
-    ) {
-        // revisarColision(hipodogeEnemigo)
-        // revisarColision(capipepoEnemigo)
-        // revisarColision(ratigueyaEnemigo)
-    }
 }
 
 function enviarPosicion(x, y) {
@@ -419,21 +447,24 @@ function enviarPosicion(x, y) {
                             'Hipodoge',
                             './assets/mokepons_mokepon_hipodoge_attack.png',
                             5,
-                            './assets/hipodoge.png'
+                            './assets/hipodoge.png',
+                            enemigo.id
                         )
                     } else if (mokeponNombre === "Capipepo") {
                         mokeponEnemigo = new Mokepon(
                             'Capipepo',
                             './assets/mokepons_mokepon_capipepo_attack.png',
                             5,
-                            './assets/capipepo.png'
+                            './assets/capipepo.png',
+                            enemigo.id
                         )
                     } else if (mokeponNombre === "Ratigueya") {
                         mokeponEnemigo = new Mokepon(
                             'Ratigueya',
                             './assets/mokepons_mokepon_ratigueya_attack.png',
                             5,
-                            './assets/ratigueya.png'
+                            './assets/ratigueya.png',
+                            enemigo.id
                         )
                     }
 
@@ -531,7 +562,8 @@ function revisarColision(enemigo) {
     }
     detenerMovimiento()
     clearInterval(intervalo) //Detenemos el intervalo
-    console.warn("Se detecto una colision");
+    console.warn("Se detecto una colision")
+    enemigoId = enemigo.id
     sectionSeleccionarAtaque.style.display = 'flex'
     sectionVerMapa.style.display = 'none'
     seleccionarMascotaEnemigo(enemigo)
